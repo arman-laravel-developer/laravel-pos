@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <meta charset="utf-8" />
     <title>@yield('title')</title>
@@ -201,8 +199,6 @@
                     </a>
                 </li>
             </ul>
-            <!--- End Sidemenu -->
-            <div class="clearfix"></div>
         </div>
     </div>
     <!-- ========== Left Sidebar End ========== -->

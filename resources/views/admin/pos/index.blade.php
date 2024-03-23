@@ -65,7 +65,7 @@
                                     $discountAmount = ($productDiscount / 100) * $subtotal;
                                     ?>
                                     <tr>
-                                        <td><img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" style="height: 20px; width: 20px;"><span>{{ \Illuminate\Support\Str::limit($item->product->name, 4) }}</span></td>
+                                        <td><img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" style="height: 30px; width: 30px;"><span>{{ \Illuminate\Support\Str::limit($item->product->name, 4) }}</span></td>
                                         <td>
                                             <input type="number" class="cart-quantity" style="width: 40px;" min="1" value="{{ $item->quantity }}" data-item-id="{{ $item->id }}">
                                         </td>
