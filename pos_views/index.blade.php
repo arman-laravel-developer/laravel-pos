@@ -105,9 +105,30 @@
                                 </div>
                             </div>
                         @else
-                            <p>No items in the cart</p>
+                            <table class="table w-100">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>QTY</th>
+                                    <th>Price</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center"><p>No items in the cart</p></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <div>
+                                    <p>Subtotal: <span style="float: right;">$0</span></p>
+                                    <p>Product Discount: <span style="float: right;">$0</span></p>
+                                    <p>Total Tax: <span style="float: right;">$0</span></p>
+                                    <p>Total: <span style="float: right;">$0</span></p>
+                                </div>
+                            </div>
                         @endif
-
                     </div>
                     <div class="card-footer">
                         <button id="place-order" class="form-control btn btn-info">Place Order</button>
