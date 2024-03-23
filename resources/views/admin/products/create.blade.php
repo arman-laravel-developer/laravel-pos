@@ -46,7 +46,7 @@
                         <div class="row mb-3">
                             <label  class="col-md-2 col-form-label">Product SKU</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control @error('sku') is-invalid @enderror" name="sku" placeholder="Product SKU"/>
+                                <input type="text" class="form-control @error('sku') is-invalid @enderror" value="{{$sku}}" name="sku" placeholder="Product SKU"/>
                                 @error('sku')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

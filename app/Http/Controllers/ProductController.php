@@ -11,7 +11,8 @@ class ProductController extends Controller
 {
     public function create()
     {
-        return view('admin.products.create');
+        $sku = rand(111, 999);
+        return view('admin.products.create', compact('sku'));
     }
 
     public function getImageUrl($request)

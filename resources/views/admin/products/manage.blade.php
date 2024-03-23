@@ -47,9 +47,9 @@
                         @foreach($products as $product)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$product->name}}</td>
-                            <td>{{$product->selling_price}}</td>
-                            <td>{{$product->purchase_price}}</td>
+                            <td>{{\Illuminate\Support\Str::limit($product->name, 14)}}</td>
+                            <td>${{number_format($product->selling_price)}}</td>
+                            <td>${{number_format($product->purchase_price)}}</td>
                             <td>
                                 <img src="{{asset($product->image)}}" alt="" style="height: 80px; width: 100px">
                             </td>
