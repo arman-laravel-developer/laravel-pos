@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 07:20 PM
+-- Generation Time: Mar 23, 2024 at 04:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,52 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `booking_management`
+-- Database: `laravel_pos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bookings`
+-- Table structure for table `cart_items`
 --
 
-CREATE TABLE `bookings` (
+CREATE TABLE `cart_items` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `hostel_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `customer_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `check_in_date` date DEFAULT NULL,
-  `check_out_date` date DEFAULT NULL,
-  `room_type` varchar(255) DEFAULT NULL,
-  `adult_count` int(11) DEFAULT NULL,
-  `child_count` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customers`
---
-
-CREATE TABLE `customers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `mobile` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `customers`
+-- Dumping data for table `cart_items`
 --
 
-INSERT INTO `customers` (`id`, `name`, `username`, `email`, `mobile`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'arman', 'arman', 'arman@gmail.com', '297843423', '$2y$10$9HAzenKwahyo8O/pFMEXueXZT9gk5m5PE81BdRsOFyMPulh44gD/G', '2024-03-19 09:33:22', '2024-03-19 09:33:22'),
-(2, 'arman', 'arman2', 'arman@gmail.com', NULL, '$2y$10$e7ETZuQi5k0CZBdaYwJ1zOnT9G5y2yrowuS6wN6AMN5d0hRP9LKD2', '2024-03-19 09:58:54', '2024-03-19 09:58:54');
+INSERT INTO `cart_items` (`id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(43, 6, 1, '2024-03-22 10:11:10', '2024-03-22 10:11:10');
 
 -- --------------------------------------------------------
 
@@ -80,34 +57,6 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hostels`
---
-
-CREATE TABLE `hostels` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `hostel_name` varchar(255) DEFAULT NULL,
-  `location` varchar(255) DEFAULT NULL,
-  `price` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `room_availability` varchar(255) DEFAULT NULL,
-  `single_room` varchar(255) DEFAULT NULL,
-  `double_room` varchar(255) DEFAULT NULL,
-  `image` text DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `hostels`
---
-
-INSERT INTO `hostels` (`id`, `hostel_name`, `location`, `price`, `description`, `room_availability`, `single_room`, `double_room`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Hotel Sheratons', 'Karwan Bazar', '100', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '11', '5', '6', 'Hostel/images/hotel-sheraton-image-1710867530.webp', 1, '2024-03-19 10:58:50', '2024-03-19 11:21:14');
 
 -- --------------------------------------------------------
 
@@ -132,9 +81,44 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_08_19_000000_create_failed_jobs_table', 1),
 (5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (6, '2022_10_25_092552_create_sessions_table', 1),
-(7, '2024_03_19_150248_create_customers_table', 2),
-(10, '2024_03_19_155005_create_hostels_table', 3),
-(11, '2024_03_19_170034_create_bookings_table', 4);
+(7, '2024_03_22_052937_create_products_table', 2),
+(8, '2024_03_22_053257_create_orders_table', 2),
+(10, '2024_03_22_064214_create_cart_items_table', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `order_total` double(8,2) NOT NULL,
+  `payable_amount` double(8,2) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `product_id`, `customer_name`, `qty`, `order_total`, `payable_amount`, `payment_type`, `created_at`, `updated_at`) VALUES
+(4, 5, 'Walk-in Customer', 9, 405.00, 405.00, 'Cash', '2024-03-22 04:50:34', '2024-03-22 04:50:34'),
+(5, 2, 'Walk-in Customer', 3, 10272.00, 10272.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
+(6, 1, 'Walk-in Customer', 2, 624.00, 624.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
+(7, 4, 'Walk-in Customer', 2, 468.00, 468.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
+(8, 5, 'Walk-in Customer', 7, 315.00, 315.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
+(9, 4, 'Walk-in Customer', 18, 4212.00, 4212.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
+(10, 3, 'Walk-in Customer', 5, 2160.00, 2160.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
+(11, 2, 'Walk-in Customer', 2, 6848.00, 6848.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
+(12, 1, 'Walk-in Customer', 1, 312.00, 312.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
+(13, 5, 'Walk-in Customer', 2, 90.00, 90.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
+(14, 6, 'Walk-in Customer', 1, 240.00, 240.00, 'Cash', '2024-03-22 10:07:38', '2024-03-22 10:07:38');
 
 -- --------------------------------------------------------
 
@@ -170,6 +154,34 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `sku` varchar(255) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `unit_value` double(8,2) NOT NULL,
+  `selling_price` double(8,2) NOT NULL,
+  `purchase_price` double(8,2) NOT NULL,
+  `discount` double(8,2) NOT NULL DEFAULT 0.00,
+  `tax` double(8,2) NOT NULL DEFAULT 0.00,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `sku`, `unit`, `unit_value`, `selling_price`, `purchase_price`, `discount`, `tax`, `image`, `created_at`, `updated_at`) VALUES
+(6, 'Mini Rechargeable Travel Portable Fan', 'Fan', 'pieces', 1.00, 240.00, 230.00, 2.00, 5.00, 'product-images/mini-rechargeable-travel-portable-fan-.65fda04492d24.webp', '2024-03-22 09:14:12', '2024-03-22 09:14:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
@@ -187,8 +199,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('DLuvjwSiBnVzBYgK8G5Gn2LZQXMsXihDB1kB1UO7', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoidjZYTFRZb3VlODBHcDl4RnBKOVlLUEpVTmhnTEN0dGsyWkFROE5DMCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTk6Imh0dHA6Ly9sb2NhbGhvc3QvYm9va2luZy1tYW5hZ2VtZW50L3B1YmxpYy9ob3N0ZWwtZGV0YWlscy8xIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRxeHBNLm9DRlluNGE5RnpVZ1IvdjEud092ZUZ2ZmU2djd0WE1uM0YxcU4zVmlJelZycC4zeSI7czo1OiJhbGVydCI7YTowOnt9czo3OiJ1c2VyX2lkIjtpOjE7czo4OiJ1c2VybmFtZSI7czo1OiJhcm1hbiI7fQ==', 1710872028),
-('pMaCna0Cx4XIZOlipQ7yu5Er4kKWkaPzHwn4q2kq', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTEg5V2x1R21iRlRLRThhS1poV2VRNnB3RXlRNmlXdTFQajREaDlLNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9sb2NhbGhvc3QvYm9va2luZy1tYW5hZ2VtZW50L3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1710863127);
+('FAfNUSvFSuW5CpETcmqM2B7O7WtpVxop8tpNjSbR', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNlVJU0w0aHFCNjRsM1UwckNrSklOaEh1amRXVWxramMwclhEa1NJdCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3QvbGFyYXZlbC1wb3MvcHVibGljL3Bvcy1pbmRleCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkTGNFeEZ3RGZPWndDY3dlY0FYTlk3ZThkNDE0SHFDNC9VelpqL2xybEY3ckxBajV5d2FhNXkiO3M6NToiYWxlcnQiO2E6MDp7fX0=', 1711124124);
 
 -- --------------------------------------------------------
 
@@ -217,23 +228,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'admin@gmail.com', '2024-03-19 05:25:25', '$2y$10$qxpM.oCFYn4a9FzUgR/v1.wOveFvfe6v7tXMn3F1qN3ViIzVrp.3y', NULL, NULL, NULL, 'r4I7vvaCMSbDN5pOMRF1cZEHfww07xJbPSi7Dqanmd6ey2i0Erq6ONxOiulc', NULL, NULL, '2024-03-19 05:25:25', '2024-03-19 05:25:25');
+(1, 'Super Admin', 'admin@gmail.com', '2024-03-21 23:24:30', '$2y$10$LcExFwDfOZwCcwecAXNY7e8d414HqC4/UzZj/lrlF7rLAj5ywaa5y', NULL, NULL, NULL, '79XMHzlkWVNzSeR4Hyda0CNf9dURh6y6BPYqaD0VwFrXTQFsWx54yTGV0GSx', NULL, NULL, '2024-03-21 23:24:30', '2024-03-21 23:24:30');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `bookings`
+-- Indexes for table `cart_items`
 --
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `cart_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_items_product_id_foreign` (`product_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -243,15 +249,15 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `hostels`
---
-ALTER TABLE `hostels`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -267,6 +273,13 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `products_sku_unique` (`sku`);
 
 --
 -- Indexes for table `sessions`
@@ -288,16 +301,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `bookings`
+-- AUTO_INCREMENT for table `cart_items`
 --
-ALTER TABLE `bookings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `cart_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -306,16 +313,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `hostels`
---
-ALTER TABLE `hostels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -324,10 +331,26 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  ADD CONSTRAINT `cart_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
