@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
@@ -32,6 +33,14 @@ class OrderController extends Controller
         $orders = $query->paginate($perPage);
 
         return view('admin.orders.order', compact('orders', 'startDate', 'endDate'));
+    }
+
+    public function delete($id)
+    {
+        $order = Order::find($id);
+        $order->delete();
+        Alert::success('Order Delete Successfull');
+        return redirect()->back();
     }
 
 }
