@@ -181,7 +181,7 @@
                                 <a href="{{route('product.create')}}">Product Create</a>
                             </li>
                             <li>
-                                <a href="#">Product Manage</a>
+                                <a href="{{route('product.manage')}}">Product Manage</a>
                             </li>
                         </ul>
                     </div>
@@ -273,6 +273,8 @@
 <script src="{{asset('/')}}admin/assets/js/pages/demo.datatable-init.js"></script>
 <!-- App js -->
 <script src="{{asset('/')}}admin/assets/js/app.js"></script>
+
+
 
 @include('sweetalert::alert')
 

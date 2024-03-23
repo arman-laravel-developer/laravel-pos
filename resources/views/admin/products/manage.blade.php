@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('title')
-    Hostel Manage | Hotel Management System
+    Product Manage | Laravel Pos
 @endsection
 
 @section('body')
@@ -23,7 +23,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">Hostel Manage</h4>
+                <h4 class="page-title">Product Manage</h4>
             </div>
         </div>
     </div>
@@ -36,47 +36,39 @@
                         <thead>
                         <tr>
                             <th>S.N</th>
-                            <th>Hostel Name</th>
-                            <th>Location</th>
-                            <th>Room Availability</th>
+                            <th>Product Name</th>
+                            <th>Selling Price</th>
+                            <th>Purchase Price</th>
                             <th>Image</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($hostels as $hostel)
+                        @foreach($products as $product)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$hostel->hostel_name}}</td>
-                            <td>{{$hostel->location}}</td>
-                            <td>{{$hostel->room_availability}}</td>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->selling_price}}</td>
+                            <td>{{$product->purchase_price}}</td>
                             <td>
-                                <img src="{{asset($hostel->image)}}" alt="" style="height: 80px; width: 100px">
+                                <img src="{{asset($product->image)}}" alt="" style="height: 80px; width: 100px">
                             </td>
                             <td>
-                                @if($hostel->status == 1)
-                                    <span class="badge bg-success">Active</span>
-                                @else
-                                    <span class="badge bg-danger">In Active</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{route('hostel.edit', ['id' => $hostel->id])}}" class="btn btn-success btn-sm" title="Edit">
+                                <a href="{{route('product.edit', ['id' => $product->id])}}" class="btn btn-success btn-sm" title="Edit">
                                     <i class="ri-edit-box-fill"></i>
                                 </a>
-                                <button type="button" onclick="confirmDelete({{$hostel->id}});" class="btn btn-danger btn-sm" title="Delete">
+                                <button type="button" onclick="confirmDelete({{$product->id}});" class="btn btn-danger btn-sm" title="Delete">
                                     <i class="ri-chat-delete-fill"></i>
                                 </button>
 
-                                <form action="{{route('hostel.delete', ['id' => $hostel->id])}}" method="POST" id="hostelDeleteForm{{$hostel->id}}">
+                                <form action="{{route('product.delete', ['id' => $product->id])}}" method="POST" id="productDeleteForm{{$product->id}}">
                                     @csrf
                                 </form>
                                 <script>
-                                    function confirmDelete(hostelId) {
+                                    function confirmDelete(productId) {
                                         var confirmDelete = confirm('Are you sure you want to delete this?');
                                         if (confirmDelete) {
-                                            document.getElementById('hostelDeleteForm' + hostelId).submit();
+                                            document.getElementById('productDeleteForm' + productId).submit();
                                         } else {
                                             return false;
                                         }

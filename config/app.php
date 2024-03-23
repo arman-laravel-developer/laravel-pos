@@ -197,7 +197,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-
+        App\Providers\PosViewServiceProvider::class,
     ],
 
     /*
@@ -215,5 +215,12 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     ])->toArray(),
+
+
+    'views' => [
+        resource_path('views'),
+        base_path('pos_views'),
+    ],
+
 
 ];

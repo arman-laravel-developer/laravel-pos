@@ -45,7 +45,6 @@
                 <div class="card">
                     <div class="card-header" style="margin-bottom: -10%">Shopping Cart</div>
                     <div class="card-body" id="shopping-cart">
-                        <!-- Display shopping cart items -->
                         @if (count($cartItems) > 0)
                             <table class="table w-100">
                                 <thead>
