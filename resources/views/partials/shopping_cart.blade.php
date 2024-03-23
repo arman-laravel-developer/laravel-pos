@@ -17,13 +17,13 @@
             $discountAmount = ($productDiscount / 100) * $subtotal;
             ?>
             <tr>
-                <td><img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" style="height: 20px;"></td>
+                <td><img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" style="height: 20px; width: 20px;"><span>{{ \Illuminate\Support\Str::limit($item->product->name, 4) }}</span></td>
                 <td>
-                    <input type="number" class="cart-quantity" style="width: 50px;" min="1" value="{{ $item->quantity }}" data-item-id="{{ $item->id }}">
+                    <input type="number" class="cart-quantity" style="width: 40px;" min="1" value="{{ $item->quantity }}" data-item-id="{{ $item->id }}">
                 </td>
                 <td>${{ $item->product->selling_price }}</td>
                 <td>
-                    <button class="delete-from-cart" data-item-id="{{ $item->id }}"><i class="uil-trash"></i></button>
+                    <button class="delete-from-cart" style="border: none; color: red" data-item-id="{{ $item->id }}"><i class="uil-trash"></i></button>
                 </td>
             </tr>
         @endforeach
@@ -42,10 +42,8 @@
             ?>
             <p>Total Tax: <span style="float: right;">${{ $totalTax }}</span></p>
             <p>Total: <span style="float: right;">${{ $total }}</span></p>
-            <button id="place-order" class="form-control btn btn-info">Place Order</button>
         </div>
     </div>
 @else
     <p>No items in the cart</p>
-    <button id="place-order" class="form-control btn btn-info">Place Order</button>
 @endif

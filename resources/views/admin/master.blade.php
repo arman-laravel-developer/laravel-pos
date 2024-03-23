@@ -37,8 +37,6 @@
     <!-- Icons css -->
     <link href="{{asset('/')}}admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-
-
 </head>
 
 <body>
@@ -221,12 +219,10 @@
                 @yield('body')
             </div>
             <!-- container -->
-
         </div>
         <!-- content -->
-
         <!-- Footer Start -->
-        <footer class="footer position-fixed bg-white">
+        <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 text-center">

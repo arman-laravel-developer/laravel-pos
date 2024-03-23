@@ -31,4 +31,5 @@ Route::middleware([ 'auth:sanctum',  config('jetstream.auth_session'), 'verified
     Route::post('/pos/place-order', [PosController::class, 'placeOrder'])->name('place-order');
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/search', [OrderController::class, 'search'])->name('orders.index');
 });

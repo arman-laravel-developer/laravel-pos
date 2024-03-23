@@ -5,5 +5,5 @@
 @endsection
 
 @section('body')
-
+    <h2>Welcome to POS Dashboard</h2>
 @endsection
