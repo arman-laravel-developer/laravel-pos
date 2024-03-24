@@ -32,7 +32,7 @@
                                 <th>Product Image</th>
                                 <th>Customer Name</th>
                                 <th>QTY</th>
-                                <th>Order Total</th>
+                                <th>Payable Amount</th>
                                 <th>Payment type</th>
                                 <th>Order Date</th>
                                 <th>Action</th>
@@ -46,10 +46,23 @@
                                     <td><img src="{{ asset($order->product->image) }}" alt="" style="height: 50px;"></td>
                                     <td>{{ $order->customer_name }}</td>
                                     <td>{{ $order->qty }}</td>
-                                    <td>${{ number_format($order->order_total) }}</td>
+                                    <td>${{ number_format($order->payable_amount) }}</td>
                                     <td>{{ $order->payment_type }}</td>
                                     <td>{{ $order->created_at->format('Y-m-d') }}</td>
-                                    <td><a href="" class="btn btn-sm btn-danger"><i class="uil-trash"></i></a></td>
+                                    <td><button type="button" onclick="confirmDelete({{$order->id}});" class="btn btn-sm btn-danger"><i class="uil-trash"></i></button></td>
+                                    <form action="{{route('orders.delete', ['id' => $order->id])}}" method="POST" id="orderDeleteForm{{$order->id}}">
+                                        @csrf
+                                    </form>
+                                    <script>
+                                        function confirmDelete(orderId) {
+                                            var confirmDelete = confirm('Are you sure you want to delete this?');
+                                            if (confirmDelete) {
+                                                document.getElementById('orderDeleteForm' + orderId).submit();
+                                            } else {
+                                                return false;
+                                            }
+                                        }
+                                    </script>
                                 </tr>
                             @endforeach
                             </tbody>

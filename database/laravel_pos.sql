@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 04:27 AM
+-- Generation Time: Mar 23, 2024 at 07:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,13 +34,6 @@ CREATE TABLE `cart_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cart_items`
---
-
-INSERT INTO `cart_items` (`id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(43, 6, 1, '2024-03-22 10:11:10', '2024-03-22 10:11:10');
 
 -- --------------------------------------------------------
 
@@ -108,17 +101,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `product_id`, `customer_name`, `qty`, `order_total`, `payable_amount`, `payment_type`, `created_at`, `updated_at`) VALUES
-(4, 5, 'Walk-in Customer', 9, 405.00, 405.00, 'Cash', '2024-03-22 04:50:34', '2024-03-22 04:50:34'),
-(5, 2, 'Walk-in Customer', 3, 10272.00, 10272.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
-(6, 1, 'Walk-in Customer', 2, 624.00, 624.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
-(7, 4, 'Walk-in Customer', 2, 468.00, 468.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
-(8, 5, 'Walk-in Customer', 7, 315.00, 315.00, 'Cash', '2024-03-22 05:13:08', '2024-03-22 05:13:08'),
-(9, 4, 'Walk-in Customer', 18, 4212.00, 4212.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
-(10, 3, 'Walk-in Customer', 5, 2160.00, 2160.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
-(11, 2, 'Walk-in Customer', 2, 6848.00, 6848.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
-(12, 1, 'Walk-in Customer', 1, 312.00, 312.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
-(13, 5, 'Walk-in Customer', 2, 90.00, 90.00, 'Cash', '2024-03-22 05:26:39', '2024-03-22 05:26:39'),
-(14, 6, 'Walk-in Customer', 1, 240.00, 240.00, 'Cash', '2024-03-22 10:07:38', '2024-03-22 10:07:38');
+(15, 6, 'Walk-in Customer', 1, 240.00, 240.00, 'Cash', '2024-03-23 10:50:10', '2024-03-23 10:50:10');
 
 -- --------------------------------------------------------
 
@@ -177,7 +160,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `sku`, `unit`, `unit_value`, `selling_price`, `purchase_price`, `discount`, `tax`, `image`, `created_at`, `updated_at`) VALUES
-(6, 'Mini Rechargeable Travel Portable Fan', 'Fan', 'pieces', 1.00, 240.00, 230.00, 2.00, 5.00, 'product-images/mini-rechargeable-travel-portable-fan-.65fda04492d24.webp', '2024-03-22 09:14:12', '2024-03-22 09:14:12');
+(6, 'Mini Rechargeable Travel Portable Fan', 'Fan', 'pieces', 1.00, 240.00, 230.00, 2.00, 5.00, 'product-images/mini-rechargeable-travel-portable-fan-.65fda04492d24.webp', '2024-03-22 09:14:12', '2024-03-22 09:14:12'),
+(11, 'Tiktok Ring Light with Ring Light Stand 6.8 feet', '234', 'piceces', 1.00, 1550.00, 1540.00, 0.00, 0.00, 'product-images/tiktok-ring-light-with-ring-light-stand-68-feet-.65ff17bf198b5.webp', '2024-03-23 11:56:15', '2024-03-23 11:56:15');
 
 -- --------------------------------------------------------
 
@@ -199,7 +183,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('FAfNUSvFSuW5CpETcmqM2B7O7WtpVxop8tpNjSbR', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNlVJU0w0aHFCNjRsM1UwckNrSklOaEh1amRXVWxramMwclhEa1NJdCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3QvbGFyYXZlbC1wb3MvcHVibGljL3Bvcy1pbmRleCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkTGNFeEZ3RGZPWndDY3dlY0FYTlk3ZThkNDE0SHFDNC9VelpqL2xybEY3ckxBajV5d2FhNXkiO3M6NToiYWxlcnQiO2E6MDp7fX0=', 1711124124);
+('Csc0zKMOPPOY4eSqBp2RCZmJ2C9TShinpKEd9nEx', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQVRVZlhlNkMxNXVHdldDY3RLNDJaUTA5Mkl6Z216cktnTTNlb1kwcSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9sb2NhbGhvc3QvbGFyYXZlbC1wb3MvcHVibGljL3Byb2R1Y3RzL21hbmFnZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkTGNFeEZ3RGZPWndDY3dlY0FYTlk3ZThkNDE0SHFDNC9VelpqL2xybEY3ckxBajV5d2FhNXkiO3M6NToiYWxlcnQiO2E6MDp7fX0=', 1711216810);
 
 -- --------------------------------------------------------
 
@@ -304,7 +288,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -322,7 +306,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -334,7 +318,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

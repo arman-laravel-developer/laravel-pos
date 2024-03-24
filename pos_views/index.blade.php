@@ -18,7 +18,7 @@
                             @foreach ($products as $product)
                                 <div class="col-lg-3 col-md-4 col-sm-6 product-item">
                                     <div class="card add-to-cart h-100" data-product-id="{{ $product->id }}" style="cursor: pointer;pointer-events: auto; margin-bottom: 0px!important;">
-                                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="card-img-top" style="max-width: 100%; height: 100px">
+                                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="card-img-top" style="max-width: 100%; height: 100px; padding: 6%">
                                         <div class="card-body">
                                             <p class="product-name text-center" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $product->name }}">{{ $product->name }}</p>
                                             <span class="product-price text-center">
@@ -45,7 +45,6 @@
                 <div class="card">
                     <div class="card-header" style="margin-bottom: -10%">Shopping Cart</div>
                     <div class="card-body" id="shopping-cart">
-                        <!-- Display shopping cart items -->
                         @if (count($cartItems) > 0)
                             <table class="table w-100">
                                 <thead>
@@ -57,15 +56,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php $subtotal = 0; ?>
+                                <?php
+                                $subtotal = 0;
+                                $discountAmount = 0;
+                                $hasDiscount = false;
+                                ?>
                                 @foreach ($cartItems as $item)
                                     <?php
                                     $productDiscount = $item->product->discount;
-                                    $subtotal += $item->quantity * $item->product->selling_price;
-                                    $discountAmount = ($productDiscount / 100) * $subtotal;
+                                    $itemSubtotal = $item->quantity * $item->product->selling_price;
+                                    $subtotal += $itemSubtotal;
+                                    if ($productDiscount > 0) {
+                                        $hasDiscount = true;
+                                        $discountAmount += ($productDiscount / 100) * $itemSubtotal;
+                                    }
                                     ?>
                                     <tr>
-                                        <td><img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" style="height: 30px; width: 30px;"><span>{{ \Illuminate\Support\Str::limit($item->product->name, 4) }}</span></td>
+                                        <td>
+                                            <img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" style="height: 30px; width: 30px;">
+                                            <span>{{ \Illuminate\Support\Str::limit($item->product->name, 4) }}</span>
+                                        </td>
                                         <td>
                                             <input type="number" class="cart-quantity" style="width: 40px;" min="1" value="{{ $item->quantity }}" data-item-id="{{ $item->id }}">
                                         </td>
@@ -80,20 +90,44 @@
                             <div>
                                 <div>
                                     <p>Subtotal: <span style="float: right;">${{ $subtotal }}</span></p>
-                                    <p>Product Discount: <span style="float: right;">${{ $discountAmount }}</span></p>
+                                    @if($hasDiscount)
+                                        <p>Product Discount: <span style="float: right;">${{ $discountAmount }}</span></p>
+                                    @endif
                                     <?php
                                     $totalTax = 0;
                                     foreach ($cartItems as $item) {
                                         $totalTax += ($item->quantity * $item->product->selling_price * $item->product->tax) / 100;
                                     }
-                                    $total = $subtotal + $totalTax - $discountAmount;
+                                    $total = $subtotal + $totalTax - ($hasDiscount ? $discountAmount : 0);
                                     ?>
                                     <p>Total Tax: <span style="float: right;">${{ $totalTax }}</span></p>
                                     <p>Total: <span style="float: right;">${{ $total }}</span></p>
                                 </div>
                             </div>
                         @else
-                            <p>No items in the cart</p>
+                            <table class="table w-100">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>QTY</th>
+                                    <th>Price</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center"><p>No items in the cart</p></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <div>
+                                    <p>Subtotal: <span style="float: right;">$0</span></p>
+                                    <p>Product Discount: <span style="float: right;">$0</span></p>
+                                    <p>Total Tax: <span style="float: right;">$0</span></p>
+                                    <p>Total: <span style="float: right;">$0</span></p>
+                                </div>
+                            </div>
                         @endif
                     </div>
                     <div class="card-footer">
