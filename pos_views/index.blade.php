@@ -194,6 +194,13 @@
                 });
             }
 
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-right',
+                timeOut: 5000
+            };
+
             // Function to place order
             function placeOrder() {
                 $.ajax({
@@ -204,6 +211,7 @@
                     },
                     success: function(response) {
                         $('#shopping-cart').html(response);
+                        toastr.success('Your order has been placed successfully.');
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);

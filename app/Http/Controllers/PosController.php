@@ -112,6 +112,7 @@ class PosController extends Controller
         $cartItems = CartItem::with('product')->get();
         $cartContent = view('pos::shopping_cart', compact('cartItems'))->render();
 
+        session()->flash('success', 'Your order has been placed successfully.');
         return response()->json($cartContent);
     }
 

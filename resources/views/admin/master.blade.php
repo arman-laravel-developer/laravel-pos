@@ -35,6 +35,8 @@
     <!-- Icons css -->
     <link href="{{asset('/')}}admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 </head>
 
 <body>
@@ -270,6 +272,8 @@
 <script src="{{asset('/')}}admin/assets/js/pages/demo.datatable-init.js"></script>
 <!-- App js -->
 <script src="{{asset('/')}}admin/assets/js/app.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
 
