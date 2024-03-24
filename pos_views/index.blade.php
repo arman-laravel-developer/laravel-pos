@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ($products as $product)
-                                <div class="col-lg-3 col-md-4 col-sm-6 product-item">
+                                <div class="col-lg-3 col-md-4 col-sm-6 product-item mb-2">
                                     <div class="card add-to-cart h-100" data-product-id="{{ $product->id }}" style="cursor: pointer;pointer-events: auto; margin-bottom: 0px!important;">
                                         <img src="{{ $product->image }}" alt="{{ $product->name }}" class="card-img-top" style="max-width: 100%; height: 100px; padding: 6%">
                                         <div class="card-body">

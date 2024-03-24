@@ -12,7 +12,7 @@ class PosController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(12);
+        $products = Product::paginate(8);
         $cartItems = CartItem::with('product')->get();
         return view('pos::index', compact('products', 'cartItems'));
     }
@@ -114,44 +114,6 @@ class PosController extends Controller
 
         return response()->json($cartContent);
     }
-
-
-
-
-
-//    public function placeOrder()
-//    {
-//        $cartItems = CartItem::all();
-//
-//        foreach ($cartItems as $item) {
-//            $order = new Order();
-//            $order->product_id = $item->product_id;
-//            $order->customer_name = 'Walk-in Customer';
-//            $order->qty = $item->quantity;
-//
-//            $basePrice = $item->product->selling_price;
-//            $discount = $item->product->discount ?? 0;
-//            $discountedPrice = $basePrice - ($basePrice * $discount / 100);
-//
-//            $order->order_total = $discountedPrice * $item->quantity;
-//
-//            $tax = $item->product->tax ?? 0;
-//            $taxAmount = $order->order_total * $tax / 100;
-//
-//            $order->payable_amount = $order->order_total + $taxAmount;
-//            $order->payment_type = 'Cash';
-//            $order->save();
-//        }
-//        foreach ($cartItems as $cartItem)
-//        {
-//            $cartItem->delete();
-//        }
-//
-//        $cartItems = CartItem::with('product')->get();
-//        $cartContent = view('pos::shopping_cart', compact('cartItems'))->render();
-//
-//        return response()->json($cartContent);
-//    }
 
     public function deleteFromCart(Request $request)
     {

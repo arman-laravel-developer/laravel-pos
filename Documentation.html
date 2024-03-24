@@ -52,6 +52,7 @@
         <ul>
             <li>XAMPP installed (or any local server environment like WAMP or MAMP)</li>
             <li>PHP 8.1 or higher installed</li>
+            <li>Composer installed</li>
             <li>MySQL database server</li>
         </ul>
 
@@ -61,7 +62,15 @@
             <li>Download the zip file containing the Laravel project.</li>
             <li>Extract the contents of the zip file to a directory on your local machine.</li>
             <li>Start your Apache and MySQL servers from the XAMPP Control Panel.</li>
-            <li>Create a new MySQL database using phpMyAdmin or any other MySQL management tool.</li>
+            <li>Access phpMyAdmin by going to <code>http://localhost/phpmyadmin</code> in your browser.</li>
+            <li>Create a new MySQL database with the same name as specified in your <code>.env</code> file (<code>your_database_name</code>).</li>
+            <li>Import the SQL file manually using phpMyAdmin:</li>
+            <ol type="a">
+                <li>Click on the newly created database.</li>
+                <li>Click on the "Import" tab.</li>
+                <li>Choose your SQL file.(database/laravel_pos.sql)</li>
+                <li>Click "Go" to import the database.</li>
+            </ol>
             <li>Configure your database settings:</li>
             <pre><code>DB_CONNECTION=mysql
  DB_HOST=127.0.0.1
@@ -86,7 +95,7 @@
         <p>All view files in POS are viewed from the pos_views/ directory</p>
 
         <h2>Conclusion</h2>
-        <p>You have successfully installed the Laravel project with PHP 8.1 and MySQL database from a zip file and imported your database from an SQL file. Happy coding!</p>
+        <p>You have successfully installed the Laravel project with PHP 8.1 and MySQL database from a zip file and imported your database from an SQL file.</p>
     </div>
 </body>
 

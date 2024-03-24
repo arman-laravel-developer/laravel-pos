@@ -75,7 +75,6 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'sku' => 'required|unique:products',
             'unit' => 'required',
             'unit_value' => 'required|numeric',
             'selling_price' => 'required|numeric',
@@ -108,7 +107,7 @@ class ProductController extends Controller
         $product->save();
 
         Alert::success('Product created successfully!');
-        return redirect()->route('product.create');
+        return redirect()->route('product.manage');
     }
 
     public function delete($id)
