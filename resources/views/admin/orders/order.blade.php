@@ -28,8 +28,7 @@
                             <thead>
                             <tr>
                                 <th>S.N</th>
-                                <th>Product Name</th>
-                                <th>Product Image</th>
+                                <th>Order Code</th>
                                 <th>Customer Name</th>
                                 <th>QTY</th>
                                 <th>Payable Amount</th>
@@ -42,14 +41,16 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ \Illuminate\Support\Str::limit($order->product->name, 15) }}</td>
-                                    <td><img src="{{ asset($order->product->image) }}" alt="" style="height: 50px;"></td>
+                                    <td>{{ $order->order_code }}</td>
                                     <td>{{ $order->customer_name }}</td>
                                     <td>{{ $order->qty }}</td>
                                     <td>${{ number_format($order->payable_amount) }}</td>
                                     <td>{{ $order->payment_type }}</td>
                                     <td>{{ $order->created_at->format('Y-m-d') }}</td>
-                                    <td><button type="button" onclick="confirmDelete({{$order->id}});" class="btn btn-sm btn-danger"><i class="uil-trash"></i></button></td>
+                                    <td>
+                                        <a href="{{route('order.detail', ['id' => $order->id])}}" class="btn btn-sm btn-success" title="show"><i class="uil-eye-slash"></i></a>
+                                        <button type="button" onclick="confirmDelete({{$order->id}});" class="btn btn-sm btn-danger" title="delete"><i class="uil-trash"></i></button>
+                                    </td>
                                     <form action="{{route('orders.delete', ['id' => $order->id])}}" method="POST" id="orderDeleteForm{{$order->id}}">
                                         @csrf
                                     </form>

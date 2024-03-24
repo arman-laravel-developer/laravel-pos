@@ -43,4 +43,10 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    public function orderDetail($id)
+    {
+        $order = Order::find($id);
+        return view('admin.orders.order-details', compact('order'));
+    }
+
 }

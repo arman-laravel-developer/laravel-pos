@@ -30,4 +30,5 @@ Route::middleware([ 'auth:sanctum',  config('jetstream.auth_session'), 'verified
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/search', [OrderController::class, 'search'])->name('orders.index');
     Route::post('/delete/{id}', [OrderController::class, 'delete'])->name('orders.delete');
+    Route::get('/order-detail/{id}', [OrderController::class, 'orderDetail'])->name('order.detail');
 });

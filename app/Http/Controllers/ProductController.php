@@ -118,13 +118,6 @@ class ProductController extends Controller
         {
             unlink($product->image);
         }
-        if ($product->orders)
-        {
-            foreach ($product->orders as $order)
-            {
-                $order->delete();
-            }
-        }
         $product->delete();
 
         Alert::success('Product Delete Successfull');
